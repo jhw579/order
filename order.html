@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../jquery-1.7.2.js"></script>
+	</head>
+	<body>
+			<p>
+				用户名：
+				<input type="text" id="name"/>
+			</p>
+			<p>
+				密码：
+				<input type="password" id="pass"/>
+			</p>
+
+			<!--<p>
+				邮箱：
+				<input type="text" id="email">
+			</p>
+			<p>
+				手机号码：
+				<input type="text" id="phone">
+			</p>-->
+			<input type="button" value="点我" id="btn"/>
+
+		<script>
+			$('#btn').click(function(){
+				$.ajax({
+					url:'order.php',
+					type:'get',
+					data:{
+						name:$('#name').val(),
+						pass:$('#pass').val(),
+					},
+					success:function(data){
+						console.log(data);
+						$("#name").val(" ");
+						$("#pass").val(" ");
+					}
+				})
+			})
+		</script>
+	</body>
+</html>
