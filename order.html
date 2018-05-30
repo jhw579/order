@@ -1,44 +1,87 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<script src="../jquery-1.7.2.js"></script>
-	</head>
-	<body>
-			<p>
-				用户名：
-				<input type="text" id="name"/>
-			</p>
-			<p>
-				密码：
-				<input type="password" id="pass"/>
-			</p>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+			list-style:none;
+		}
+		#order{
+			width:500px;
+			height:600px;
+			border:1px solid #ccc;
+			margin:100px auto;
+		}
+		#order div{
+			width:450px;
+			height:40px;
+			margin-left:50px;
+			margin-top:30px;
+		}
+		#order div input{
+			width:300px;
+			height:40px;
+		}
+		#btn{
+			width:70px;
+			height:30px;
+			margin:0 auto;
+		}
+	</style>
+</head>
+		<div id="order">
+			<div>
+				用户名:&nbsp;&nbsp;&nbsp;<input id="user" type="text" placeholder="请输入你的用户名"><br>
+			</div>
+			<div>
+				密码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="pass" type="password" placeholder="请输入你的密码"><br>
+			</div>
+			<div>
+				手机号码:<input id="phone" type="text" placeholder="请输入你的手机号码"><br>
+			</div>
+			<div>
+				邮箱:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="email" type="text" placeholder="请输入你的邮箱"><br>
+			</div>
+			<div style="margin-left:100px;margin-top:50px;">
+				<input type="button" id="btn"  value="登录">
+			</div>
+		</div>
+	
+<body>
+<script src="../jquery-1.7.2.js"></script>
+<script>
+$("#btn").click(function(){
+	$.ajax({
+   	    type:'post',
+   	    url:'order.php',
+   	    data:{
+   	 	    user:$('#user').val(),
+   	 	    pass:$('#pass').val(),
+// 	 	    pass:$('#phone').val(),
+   	    },
+   	    success:function(data){
+            console.log(data);
+            for(var i=0;i<$("input").length-1;i++){
+//          	console.log($("input").eq(i).val())
+            	if($("input").eq(i).val()==""){
+            		alert("请输入正确的信息");
+            		return false;
+            	}
+            }
+   	    }
+    })
+})
 
-			<!--<p>
-				邮箱：
-				<input type="text" id="email">
-			</p>
-			<p>
-				手机号码：
-				<input type="text" id="phone">
-			</p>-->
-			<input type="button" value="点我" id="btn"/>
+   
+   
+   
+   
+   
+   
 
-		<script>
-			$('#btn').click(function(){
-				$.ajax({
-					url:'order.php',
-					type:'get',
-					data:{
-						name:$('#name').val(),
-						pass:$('#pass').val(),
-					},
-					success:function(data){
-						console.log(data);
-					}
-				})
-			})
-		</script>
-	</body>
+</script>
+</body>
 </html>
